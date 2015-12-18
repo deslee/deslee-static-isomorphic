@@ -26,6 +26,13 @@ class BlogIndex extends Component {
         {Object.keys(this.props.meta)
           .sort((k1, k2) => new Date(this.props.meta[k1].date) - new Date(this.props.meta[k2].date))
           .reverse()
+          .filter(slug => {
+            var post = this.props.meta[slug];
+            if (this.props.tag) {
+              return post.tags.indexOf(this.props.tag) !== -1;
+            }
+            return true;
+          })
           .map(slug => {
           var post = this.props.meta[slug];
           var date = formatDate(new Date(post.date))
@@ -41,8 +48,9 @@ class BlogIndex extends Component {
                   </li>
               )}
             </ul>
-            <p className="mt1">I recently checked out Polymer. It's pretty cool. Polymer is a library for building web
-              components. Web components are reusable <a href="experimented-polymer" onClick={Link.handleClick}>... »</a></p>
+            {this.props.archive ? null : (
+              <p className="mt1"><span className="mt1" dangerouslySetInnerHTML={{__html: post.preview || ''}}></span><a href={post.slug} onClick={Link.handleClick}>... »</a></p>
+            )}
           </div>);
         })}
       </section>

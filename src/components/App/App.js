@@ -5,7 +5,7 @@ import styles from './App.css';
 import withContext from '../../decorators/withContext';
 import withStyles from '../../decorators/withStyles';
 import Header from '../Header';
-import Feedback from '../Feedback';
+import Sidebar from '../Sidebar';
 import Footer from '../Footer';
 import classNames from 'classnames'
 import AppStore from '../../stores/AppStore'
@@ -50,7 +50,7 @@ class App extends Component {
             </main>
 
             <div className="col col-12 lg-col-3">
-              <Feedback />
+              <Sidebar />
             </div>
           </div>
 

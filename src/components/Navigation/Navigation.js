@@ -26,7 +26,7 @@ class Navigation extends Component {
             <a href="about" className="block" onClick={Link.handleClick}>About</a></li>
           <li
             className={navItem}>
-            <a href="contact" className="block" onClick={Link.handleClick}>Contact</a></li>
+            <a href="archive" className="block" onClick={Link.handleClick}>Archive</a></li>
         </ul>
       </nav>
     );

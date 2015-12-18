@@ -1,11 +1,11 @@
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
 import React, { Component } from 'react';
-import styles from './Feedback.css';
+import styles from './Sidebar.css';
 import withStyles from '../../decorators/withStyles';
 
 //@withStyles(styles)
-class Feedback extends Component {
+class Sidebar extends Component {
 
   render() {
     return (
@@ -31,4 +31,4 @@ class Feedback extends Component {
 
 }
 
-export default Feedback;
+export default Sidebar;

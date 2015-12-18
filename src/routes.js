@@ -5,9 +5,6 @@ import Router from 'react-routing/src/Router';
 import http from './core/HttpClient';
 import App from './components/App';
 import ContentPage from './components/ContentPage';
-import ContactPage from './components/ContactPage';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
 import BlogIndex from './components/BlogIndex'
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
@@ -33,16 +30,8 @@ const router = new Router(on => {
   });
 
   on(globals.publicUrl+'/', async (state) => <BlogIndex title="Desmond Lee" meta={blogMeta} />);
-
-  on(globals.publicUrl+'/blog/:page', async (state) => {
-    return <p>{state.params.page}</p>
-  });
-
-  on(globals.publicUrl+'/contact', async () => <ContactPage />);
-
-  on(globals.publicUrl+'/login', async () => <LoginPage />);
-
-  on(globals.publicUrl+'/register', async () => <RegisterPage />);
+  on(globals.publicUrl+'/archive', async (state) => <BlogIndex title="Desmond Lee" meta={blogMeta} archive="true" />);
+  on(globals.publicUrl+'/tag/:tag', async (state) => <BlogIndex title="Desmond Lee" meta={blogMeta} tag={state.params.tag} />);
 
   on(globals.publicUrl+'/not-found', async (state) => {
     state.error = {
