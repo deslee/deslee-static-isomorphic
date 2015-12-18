@@ -32,13 +32,32 @@ class App extends Component {
 
   render() {
     return !this.props.error ? (
-      <div>
-        <Header />
-        {this.props.children}
-        <Feedback />
-        <Footer />
-        <div className={classNames({'loadingScreen': true, 'isLoading': this.state.isLoading})}>
-          Loading...
+      <div style={{'background': '#ddd'}}>
+        <div className="App-container container flex flex-column">
+
+          <div className="clearfix flex-grow sym-shadow bg-white">
+            <header className="px2 col col-12 md-col-3 center md-left">
+              <Header />
+            </header>
+
+            <main className="px2 col col-12 md-col-9 lg-col-6">
+              {this.props.children}
+            </main>
+
+            <div className="col col-12 lg-col-3">
+              <Feedback />
+            </div>
+          </div>
+
+          <footer className="gray left-align p2 sym-shadow bg-white">
+            <Footer />
+          </footer>
+
+
+          <div className={classNames({'loadingScreen': true, 'isLoading': this.state.isLoading})}>
+            Loading...
+          </div>
+
         </div>
       </div>
     ) : this.props.children;

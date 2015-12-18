@@ -8,6 +8,7 @@ import ContentPage from './components/ContentPage';
 import ContactPage from './components/ContactPage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
+import BlogIndex from './components/BlogIndex'
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import globals from './globals'
@@ -26,7 +27,7 @@ const router = new Router(on => {
     return component && <App context={state.context} error={state.error}>{component}</App>;
   });
 
-  on(globals.publicUrl+'/blog/', async (state) => <p>{JSON.stringify(blogMeta)}</p>);
+  on(globals.publicUrl+'/', async (state) => <BlogIndex title="Desmond Lee" />);
 
   on(globals.publicUrl+'/blog/:page', async (state) => {
     return <p>{state.params.page}</p>
