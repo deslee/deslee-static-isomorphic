@@ -42,7 +42,7 @@ const JS_LOADER = {
 
 //
 // Common configuration chunk to be used for both
-// client-side (app.js) and server-side (server.js) bundles
+// client-side (main.js) and server-side (server.js) bundles
 // -----------------------------------------------------------------------------
 
 const config = {
@@ -123,9 +123,9 @@ const config = {
 
 const appConfig = merge({}, config, {
   entry: {
-    'app': [
+    'main': [
       ...(WATCH ? ['webpack-hot-middleware/client'] : []),
-      './src/app.js'
+      './src/main.js'
     ]
   },
   output: {
