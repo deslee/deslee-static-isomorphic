@@ -62,30 +62,10 @@
   min-height: 100vh;
 }
 
-
-
 @media (min-width: 75em) {
   .cont-mt1 {
     margin-top: .5rem;
   }
-}
-
-
-.loadingScreen {
-  display: none;
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  background-color: rgba(255,255,255,0.8);
-  top:0;
-  left:0;
-  font-size: 3rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.loadingScreen.isLoading {
-  display: flex;
 }
 
 .sym-shadow {
@@ -94,4 +74,33 @@
 
 .animate-margin-top {
   transition: margin-top .3s;
+}
+
+.loadingBar {
+  overflow: hidden;
+  width: 100%;
+  transition: height .3s;
+  position:fixed;
+  top:0;
+  height: 0;
+}
+
+.loadingBar.showing {
+  height: 5px;
+}
+
+.loadingBar.showing div {
+  animation: marquee 1s linear infinite;
+}
+
+.loadingBar div {
+  position:relative;
+  width: 10%;
+  height: 100%;
+}
+
+
+@keyframes marquee {
+  0% { left: 0; }
+  100% { left: 100%; }
 }

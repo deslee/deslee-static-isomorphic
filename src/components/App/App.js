@@ -33,6 +33,10 @@ class App extends Component {
   render() {
     return !this.props.error ? (
       <div style={{'background': '#ddd'}}>
+        <div className={classNames({'loadingBar': true, 'showing': this.state.isLoading})}>
+          <div className="bg-blue"></div>
+        </div>
+
         <div className="App-container container flex flex-column">
 
           <div className="cont-mt1 animate-margin-top"></div>
@@ -53,12 +57,6 @@ class App extends Component {
           <footer className="gray left-align p2 sym-shadow bg-white">
             <Footer />
           </footer>
-
-
-          <div className={classNames({'loadingScreen': true, 'isLoading': this.state.isLoading})}>
-            Loading...
-          </div>
-
         </div>
       </div>
     ) : this.props.children;
