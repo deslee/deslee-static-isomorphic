@@ -35,6 +35,7 @@ class App extends Component {
       <div style={{'background': '#ddd'}}>
         <div className="App-container container flex flex-column">
 
+          <div className="cont-mt1 animate-margin-top"></div>
           <div className="clearfix flex-grow sym-shadow bg-white">
             <header className="px2 col col-12 md-col-3 center md-left">
               <Header />

@@ -65,7 +65,7 @@ async function getBlogMeta() {
           var extension = extname(file);
           var post = parseMeta(fileContent, extension);
 
-          if (post.blog) {
+          if (post.blog && !post.draft) {
             blogPosts.push(Object.assign({}, post, {slug: basename(file, extname(file))}));
           }
 

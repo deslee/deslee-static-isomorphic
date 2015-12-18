@@ -13,6 +13,7 @@ import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import globals from './globals'
 import Location from './core/Location';
+import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
 import setLoading from './actions/setLoading'
 
@@ -24,10 +25,14 @@ console.log('available dynamic routes', Object.keys(routes))
 const router = new Router(on => {
   on('*', async (state, next) => {
     const component = await next();
+    if (canUseDOM) {
+      var fitvids = require('fitvids');
+      setTimeout(() => fitvids(), 1);
+    }
     return component && <App context={state.context} error={state.error}>{component}</App>;
   });
 
-  on(globals.publicUrl+'/', async (state) => <BlogIndex title="Desmond Lee" />);
+  on(globals.publicUrl+'/', async (state) => <BlogIndex title="Desmond Lee" meta={blogMeta} />);
 
   on(globals.publicUrl+'/blog/:page', async (state) => {
     return <p>{state.params.page}</p>

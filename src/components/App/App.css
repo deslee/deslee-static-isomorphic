@@ -51,14 +51,24 @@
 */
 
 /* Default custom properties */
-@import 'basscss-defaults';
 
+@import './des-typography';
+@import './des-paddings';
+
+@import 'basscss-defaults';
 @import '../variables.css';
 
 .App-container {
-  min-height:100vh;
+  min-height: 100vh;
 }
 
+
+
+@media (min-width: 75em) {
+  .cont-mt1 {
+    margin-top: .5rem;
+  }
+}
 
 
 .loadingScreen {
@@ -80,4 +90,8 @@
 
 .sym-shadow {
   box-shadow: 0 10px 10px 1px #888;
+}
+
+.animate-margin-top {
+  transition: margin-top .3s;
 }

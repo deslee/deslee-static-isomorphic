@@ -14,15 +14,21 @@ class Navigation extends Component {
   };
 
   render() {
+    var navItem = 'py1 pl0 pr0 md-no-hover-box-shadow md-no-active-box-shadow block col-12 btn btn-outline not-rounded y-group-item regular white main-nav-item'
     return (
-      <div className={classNames(this.props.className, 'Navigation')} role="navigation">
-        <a className="Navigation-link" href="about" onClick={Link.handleClick}>About</a>
-        <a className="Navigation-link" href="contact" onClick={Link.handleClick}>Contact</a>
-        <span className="Navigation-spacer"> | </span>
-        <a className="Navigation-link" href="login" onClick={Link.handleClick}>Log in</a>
-        <span className="Navigation-spacer">or</span>
-        <a className="Navigation-link Navigation-link--highlight" href="register" onClick={Link.handleClick}>Sign up</a>
-      </div>
+      <nav className={classNames(this.props.className, 'Navigation')} role="navigation">
+        <ul className="col-12 p0 list-reset inline-block clearfix blue">
+          <li
+            className={navItem}>
+            <a href="" className="block" onClick={Link.handleClick}>Home</a></li>
+          <li
+            className={navItem}>
+            <a href="about" className="block" onClick={Link.handleClick}>About</a></li>
+          <li
+            className={navItem}>
+            <a href="contact" className="block" onClick={Link.handleClick}>Contact</a></li>
+        </ul>
+      </nav>
     );
   }
 

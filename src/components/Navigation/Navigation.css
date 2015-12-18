@@ -1,2 +1,26 @@
 /* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
+@import 'basscss-defaults';
+@import '../variables.css';
+
+.main-nav-item {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.main-nav-item:first-child {
+  border-top: 1px solid var(--border-color);
+}
+
+@media (--breakpoint-md) {
+
+  .btn.md-no-active-box-shadow:active, .md-no-hover-box-shadow:hover {
+    box-shadow: none;
+  }
+
+  .main-nav-item:first-child {
+    border-top: none;
+  }
+  .main-nav-item {
+    border: none;
+  }
+}

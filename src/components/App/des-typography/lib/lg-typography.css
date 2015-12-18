@@ -1,0 +1,5 @@
+@media (--breakpoint-lg) {
+    .lg-left {
+        text-align: left;
+    }
+}

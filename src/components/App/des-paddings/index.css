@@ -1,0 +1,23 @@
+.pb1 {
+    padding-bottom: 1em;
+}
+
+.pl1 {
+    padding-left: 1em;
+}
+
+.pt1 {
+    padding-top: 1em;
+}
+
+.pr1 {
+    padding-right: 1em;
+}
+
+.pl0 {
+    padding-left: 0;
+}
+
+.pr0 {
+    padding-right: 0;
+}

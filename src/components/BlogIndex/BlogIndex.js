@@ -3,11 +3,13 @@
 import React, { PropTypes, Component } from 'react';
 import styles from './BlogIndex.css';
 import withStyles from '../../decorators/withStyles';
+import {format as formatDate} from '../../utils/DateUtils'
 
 //@withStyles(styles)
 class BlogIndex extends Component {
 
   static propTypes = {
+    meta: PropTypes.object.isRequired,
     title: PropTypes.string.isRequired,
   };
 
@@ -18,11 +20,31 @@ class BlogIndex extends Component {
   render() {
     this.context.onSetTitle(this.props.title);
     return (
-      <div className="BlogIndex">
-        <div className="BlogIndex-container">
-          bloggy
-        </div>
-      </div>
+      <section className="BlogIndex">
+
+        {Object.keys(this.props.meta)
+          .sort((k1, k2) => new Date(this.props.meta[k1].date) - new Date(this.props.meta[k2].date))
+          .reverse()
+          .map(slug => {
+          var post = this.props.meta[slug];
+          var date = formatDate(new Date(post.date))
+          return (<div className="post border-bottom pb1" key={slug}>
+            <h2><a href={slug}>{post.title}</a></h2>
+            <time dateTime={date}>{date}</time>
+            &nbsp;
+            <ul className="p0 inline">
+              {post.tags.map(
+                tag =>
+                  <li className="inline" key={tag}>
+                    <a href={'tag/'+tag} className="silver navy bg-darken-1 px1 mr1 rounded">{tag}</a>
+                  </li>
+              )}
+            </ul>
+            <p className="mt1">I recently checked out Polymer. It's pretty cool. Polymer is a library for building web
+              components. Web components are reusable <a href="experimented-polymer">... »</a></p>
+          </div>);
+        })}
+      </section>
     );
   }
 

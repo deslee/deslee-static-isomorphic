@@ -2,5 +2,6 @@
 
 @import '../variables.css';
 
-.ContentPage-container {
+.post:last-child {
+  border-bottom: none;
 }

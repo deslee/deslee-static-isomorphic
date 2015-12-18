@@ -2,3 +2,9 @@
 
 @import '../variables.css';
 
+.Header-img {
+  width: 9em;
+  height: 9em;
+  max-width: 9em;
+  margin: 2rem auto 0;
+}

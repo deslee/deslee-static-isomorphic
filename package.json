@@ -5,6 +5,7 @@
     "npm": ">=3.1 <4"
   },
   "dependencies": {
+    "babel-core": "5.8.25",
     "basscss": "latest",
     "basscss-align": "latest",
     "basscss-background-colors": "latest",
@@ -40,13 +41,13 @@
     "basscss-utility-layout": "latest",
     "basscss-utility-typography": "latest",
     "basscss-white-space": "latest",
-    "flex-object": "latest",
-    "babel-core": "5.8.25",
     "classnames": "^2.1.5",
     "eventemitter3": "1.1.1",
     "express": "4.13.3",
     "fastclick": "1.0.6",
     "fbjs": "0.3.1",
+    "fitvids": "^1.0.2",
+    "flex-object": "latest",
     "flux": "2.1.1",
     "history": "1.11.1",
     "normalize.css": "3.0.3",
