@@ -12,6 +12,8 @@ import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import globals from './globals'
 
+import setLoading from './actions/setLoading'
+
 export const routes = {}; // Auto-generated via webpack loader. See tools/lib/routes-loader.js
 
 console.log('available dynamic routes', Object.keys(routes))
@@ -44,7 +46,10 @@ const router = new Router(on => {
     console.log('route path', reqPath);
     var handler = routes[reqPath];
     if (handler) {
+      setLoading(true);
       var result = await handler();
+      //await fakeWait();
+      setLoading(false);
       result.path = reqPath;
       return result && <ContentPage {...result} />;
     } else {
@@ -55,5 +60,11 @@ const router = new Router(on => {
     }
   });
 });
+
+async function fakeWait() {
+  return new Promise(resolve => {
+    setTimeout(resolve, 1000);
+  })
+}
 
 export default router;

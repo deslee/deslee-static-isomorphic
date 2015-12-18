@@ -3,5 +3,6 @@
 import keyMirror from 'fbjs/lib/keyMirror';
 
 export default keyMirror({
-
+  LOADING_STARTED: null,
+  LOADING_FINISHED: null
 });

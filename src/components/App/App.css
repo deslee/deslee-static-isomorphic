@@ -91,6 +91,23 @@ textarea {
   padding: 0.2em 0;
 }
 
+.loadingScreen {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background-color: rgba(255,255,255,0.8);
+  top:0;
+  left:0;
+  font-size: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingScreen.isLoading {
+  display: flex;
+}
+
 /*
  * Print styles
  * Inlined to avoid the additional HTTP request:
