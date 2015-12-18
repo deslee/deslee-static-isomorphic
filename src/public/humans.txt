@@ -1,15 +1,14 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
+# Person
+    Name: Desmond Lee
+    Contact: desmond.lee.public@gmail.com
+    Twitter: @desmond_c_lee
 
-# TEAM
-
-    <name> -- <role> -- <twitter>
-
-# THANKS
-
-    <name>
+# Site
+    Language: English
+    DOctype: HTML5
+    IDE: WebStorm
 
 # TECHNOLOGY COLOPHON
-
-    CSS3, HTML5, JavaScript
-    React, Flux, SuperAgent
+    PostCSS, HTML5, ECMAScript® 2015
+    React, Reflux, webpack, BassCSS
+    Jade, Markdown, Frontmatter
