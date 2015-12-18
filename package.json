@@ -124,6 +124,7 @@
     "deploy": "babel-node --eval \"require('./tools/deploy')().catch(err => console.error(err.stack))\"",
     "render": "babel-node --eval \"require('./tools/render')().catch(err => console.error(err.stack))\"",
     "serve": "babel-node --eval \"require('./tools/serve')().catch(err => console.error(err.stack))\"",
-    "start": "babel-node --eval \"require('./tools/start')().catch(err => console.error(err.stack))\""
+    "start": "babel-node --eval \"require('./tools/start')().catch(err => console.error(err.stack))\"",
+    "stage": "aws s3 sync --delete ./build/public s3://deslee-stage"
   }
 }
