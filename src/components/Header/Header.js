@@ -24,7 +24,7 @@ class Header extends Component {
       <div className="Header">
         <div className="Header-container">
           <a className="Header-brand" href="" onClick={Link.handleClick}>
-            <img className="Header-brandImg" src={this.headerImg} className="circle Header-img" alt="" />
+            <img className="Header-brandImg" src={this.headerImg} className="block circle Header-img" alt="" />
           </a>
           <h1>Desmond Lee</h1>
           <Navigation className="Header-nav" />
