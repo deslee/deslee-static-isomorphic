@@ -1,4 +1,4 @@
-import parser from './jade-with-fm'
+import parser from './markdown-with-fm'
 
 export default function(source) {
   this.cacheable();

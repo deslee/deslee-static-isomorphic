@@ -96,6 +96,9 @@ const config = {
       }, {
         test: /\.jade$/,
         loader: 'json-loader!'+path.join(__dirname, './lib/jade-with-fm-loader.js'),
+      },{
+        test: /\.md$/,
+        loader: 'json-loader!'+path.join(__dirname, './lib/markdown-with-fm-loader.js'),
       }, {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
         loader: 'url-loader?limit=10000',
@@ -193,10 +196,13 @@ const appConfig = merge({}, config, {
 // -----------------------------------------------------------------------------
 
 const renderConfig = merge({}, config, {
-  entry: './src/render.js',
+  entry: {
+    render: './src/render.js',
+    server: './src/server.js'
+  },
   output: {
     path: './build',
-    filename: 'render.js',
+    filename: '[name].js',
     libraryTarget: 'commonjs2',
   },
   target: 'node',
@@ -235,52 +241,4 @@ const renderConfig = merge({}, config, {
   },
 });
 
-//
-// Configuration for the server-side bundle (server.js)
-// -----------------------------------------------------------------------------
-
-const serverConfig = merge({}, config, {
-  entry: './src/server.js',
-  output: {
-    path: './build',
-    filename: 'server.js',
-    libraryTarget: 'commonjs2',
-  },
-  target: 'node',
-  externals: [
-    function filter(context, request, cb) {
-      const isExternal =
-        request.match(/^[a-z][a-z\/\.\-0-9]*$/i) &&
-        !request.match(/^react-routing/) &&
-        !context.match(/[\\/]react-routing/);
-      cb(null, Boolean(isExternal));
-    },
-  ],
-  node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    __filename: false,
-    __dirname: false,
-  },
-  devtool: 'source-map',
-  plugins: [
-    ...config.plugins,
-    new webpack.DefinePlugin(GLOBALS),
-    new webpack.BannerPlugin('require("source-map-support").install();',
-      { raw: true, entryOnly: false }),
-  ],
-  module: {
-    loaders: [
-      JS_LOADER,
-      ...config.module.loaders,
-      {
-        test: /\.extra.css$/,
-        loader: 'css-loader!postcss-loader',
-      },
-    ],
-  },
-});
-
-export default [appConfig, renderConfig, serverConfig];
+export default [appConfig, renderConfig];

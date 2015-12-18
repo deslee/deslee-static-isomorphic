@@ -11,8 +11,8 @@ import Html from './components/Html';
 import globals from './globals'
 
 var customRoutes = Router.routes.map(route => {
-  return route.path //route.path.slice(globals.publicUrl.length);
-}).filter(path => path.length && path.indexOf('*') == -1);
+  return route.path; //route.path.slice(globals.publicUrl.length);
+}).filter(path => path.length && path.indexOf('*') == -1 && path.indexOf(':') == -1);
 
 Object.keys(routes).concat(customRoutes).forEach(async route => {
 
@@ -54,3 +54,14 @@ Object.keys(routes).concat(customRoutes).forEach(async route => {
   mkdirp.sync(path.dirname(filePath));
   fs.writeFile(filePath, html);
 });
+
+// render blog
+/*
+Object.keys(routes).forEach(async path => {
+  var routeLoader = routes[path];
+  var content = await routeLoader();
+  if (content.blog) {
+    console.log(content.title)
+  }
+});
+*/

@@ -11,10 +11,12 @@ import RegisterPage from './components/RegisterPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 import globals from './globals'
+import Location from './core/Location';
 
 import setLoading from './actions/setLoading'
 
 export const routes = {}; // Auto-generated via webpack loader. See tools/lib/routes-loader.js
+export const blogMeta = {};
 
 console.log('available dynamic routes', Object.keys(routes))
 
@@ -22,6 +24,12 @@ const router = new Router(on => {
   on('*', async (state, next) => {
     const component = await next();
     return component && <App context={state.context} error={state.error}>{component}</App>;
+  });
+
+  on(globals.publicUrl+'/blog/', async (state) => <p>{JSON.stringify(blogMeta)}</p>);
+
+  on(globals.publicUrl+'/blog/:page', async (state) => {
+    return <p>{state.params.page}</p>
   });
 
   on(globals.publicUrl+'/contact', async () => <ContactPage />);
