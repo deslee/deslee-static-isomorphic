@@ -83,7 +83,7 @@ async function processRoute(route) {
   console.log("writing to", filePath);
   mkdirp.sync(path.dirname(filePath));
   var html = await dispatch(route);
-  html = replaceAll(html, '&lt;?= hash ?&gt;', hash)
+  html = replaceAll(html, '&lt;?= hash ?&gt;', hash.scriptHash)
   fs.writeFile(filePath, html);
 }
 
@@ -91,14 +91,21 @@ async function getHash() {
   return new Promise((resolve, reject) => {
     var publicPath = path.join(__dirname, 'public');
     var dir = fs.readdirSync(publicPath);
-    var filterResult = dir.filter(name => name.indexOf('main-') == 0);
-    var fileName = filterResult.length ? filterResult[0] : null;
-    if (fileName) {
-      var hash = fileName.substring('main-'.length, fileName.indexOf('.js'));
-      resolve(hash);
-    } else {
-      reject();
+    var mainScriptFilter = dir.filter(name => name.indexOf('main-') == 0);
+    var scriptFile = mainScriptFilter.length ? mainScriptFilter[0] : null;
+
+    var styleFilter = dir.filter(name => name.indexOf('style-') == 0);
+    var styleFile = mainScriptFilter.length ? mainScriptFilter[0] : null;
+    var result = {}
+    if (scriptFile) {
+      var scriptHash = scriptFile.substring('main-'.length, scriptFile.indexOf('.cached.js'));
+      result.scriptHash = scriptHash;
     }
+    if (styleFile) {
+      var styleHash = styleFile.substring('style-'.length, styleFile.indexOf('.cached.css'))
+      result.styleHash = styleHash;
+    }
+    resolve(result);
   })
 }
 

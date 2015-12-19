@@ -47,7 +47,7 @@ class Html extends Component {
       </head>
       <body>
         <div id="app" dangerouslySetInnerHTML={{__html: this.props.body}} />
-        <script async src={'main-<?= hash ?>.js'}></script>
+        <script async src={'main-<?= hash ?>.cached.js'}></script>
         <script dangerouslySetInnerHTML={this.trackingCode()} />
       </body>
       </html>

@@ -68,7 +68,7 @@ const config = {
 
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new ExtractTextPlugin("style.css", {
+    new ExtractTextPlugin("style.[contenthash].cached.css", {
       allChunks: true
     })
   ],
@@ -101,7 +101,7 @@ const config = {
         loader: 'json-loader!'+path.join(__dirname, './lib/markdown-with-fm-loader.js'),
       }, {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: 'url-loader?limit=10000',
+        loader: 'url-loader?limit=10000&name=[hash].cached.[ext]',
       }, {
         test: /\.(eot|ttf|wav|mp3)$/,
         loader: 'file-loader',
@@ -134,7 +134,7 @@ const appConfig = merge({}, config, {
   output: {
     path: path.join(__dirname, '../build/public'),
     pathinfo: DEBUG,
-    filename: '[name]-[hash].js',
+    filename: '[name]-[hash].cached.js',
     publicPath: globals.publicUrl + '/'
   },
 
