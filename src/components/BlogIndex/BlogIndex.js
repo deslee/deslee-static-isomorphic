@@ -35,7 +35,7 @@ class BlogIndex extends Component {
           })
           .map(slug => {
           var post = this.props.meta[slug];
-          var date = formatDate(new Date(post.date))
+          var date = formatDate(post.date)
           return (<div className="post border-bottom pb1" key={slug}>
             <h2><a href={slug} onClick={Link.handleClick}>{post.title}</a></h2>
             <time dateTime={date}>{date}</time>
@@ -44,7 +44,7 @@ class BlogIndex extends Component {
               {post.tags.map(
                 tag =>
                   <li className="inline" key={tag}>
-                    <a href={'tag/'+tag} className="silver navy bg-darken-1 px1 mr1 rounded" onClick={Link.handleClick}>{tag}</a>
+                    <a href={'tag/'+tag} className="black bg-darken-1 px1 mr1 rounded" onClick={Link.handleClick}>{tag}</a>
                   </li>
               )}
             </ul>

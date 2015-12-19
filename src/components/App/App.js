@@ -9,11 +9,13 @@ import Sidebar from '../Sidebar';
 import Footer from '../Footer';
 import classNames from 'classnames'
 import AppStore from '../../stores/AppStore'
+import CSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 
 @withContext
 class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
+    path: PropTypes.string.isRequired,
     error: PropTypes.object,
   };
 
@@ -31,7 +33,7 @@ class App extends Component {
   };
 
   render() {
-    return !this.props.error ? (
+    return (
       <div style={{'background': '#ddd'}}>
         <div className={classNames({'loadingBar': true, 'showing': this.state.isLoading})}>
           <div className="bg-blue"></div>
@@ -46,7 +48,9 @@ class App extends Component {
             </header>
 
             <main className="px2 col col-12 md-col-9 lg-col-6">
-              {this.props.children}
+              <CSSTransitionGroup transitionName="App-transition" transitionEnterTimeout={250} transitionLeaveTimeout={1} >
+                <div key={this.props.path}>{this.props.children}</div>
+              </CSSTransitionGroup>
             </main>
 
             <div className="col col-12 lg-col-3">
@@ -59,7 +63,7 @@ class App extends Component {
           </footer>
         </div>
       </div>
-    ) : this.props.children;
+    )
   }
 
 }

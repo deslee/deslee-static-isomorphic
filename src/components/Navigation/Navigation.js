@@ -24,9 +24,9 @@ class Navigation extends Component {
           <li
             className={navItem}>
             <a href="about" className="block" onClick={Link.handleClick}>About</a></li>
-          <li
-            className={navItem}>
-            <a href="archive" className="block" onClick={Link.handleClick}>Archive</a></li>
+          {/*<li
+           className={navItem}>
+           <a href="archive" className="block" onClick={Link.handleClick}>Archive</a></li>*/}
         </ul>
       </nav>
     );

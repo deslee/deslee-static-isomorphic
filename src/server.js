@@ -7,6 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/server';
 import Router from './routes';
 import Html from './components/Html';
+import fs from 'fs';
 
 const server = global.server = express();
 
@@ -25,7 +26,7 @@ server.get('*', async (req, res, next) => {
       onInsertCss: value => css.push(value),
       onSetTitle: value => data.title = value,
       onSetMeta: (key, value) => data[key] = value,
-      onPageNotFound: () => statusCode = 404,
+      onPageNotFound: () => statusCode = 404
     };
 
     await Router.dispatch({ path: req.path, context }, (state, component) => {
@@ -33,12 +34,35 @@ server.get('*', async (req, res, next) => {
       data.css = css.join('');
     });
 
-    const html = ReactDOM.renderToStaticMarkup(<Html base="/" {...data} />);
+    var hash = await getHash();
+
+    var html = ReactDOM.renderToStaticMarkup(<Html base="/" {...data} />);
+    html = replaceAll(html, '&lt;?= hash ?&gt;', hash);
     res.status(statusCode).send('<!doctype html>\n' + html);
   } catch (err) {
     next(err);
   }
 });
+
+async function getHash() {
+  return new Promise((resolve, reject) => {
+    var publicPath = path.join(__dirname, 'public');
+    var dir = fs.readdirSync(publicPath);
+    var filterResult = dir.filter(name => name.indexOf('main-') == 0);
+    var fileName = filterResult.length ? filterResult[0] : null;
+    if (fileName) {
+      var hash = fileName.substring('main-'.length, fileName.indexOf('.js'));
+      resolve(hash);
+    } else {
+      reject();
+    }
+  })
+}
+
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+}
+
 
 //
 // Launch the server

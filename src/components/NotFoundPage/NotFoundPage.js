@@ -4,7 +4,7 @@ import React, { PropTypes, Component } from 'react';
 import withStyles from '../../decorators/withStyles';
 import styles from './NotFoundPage.extra.css';
 
-@withStyles(styles)
+//@withStyles(styles)
 class NotFoundPage extends Component {
 
   static contextTypes = {
@@ -17,7 +17,7 @@ class NotFoundPage extends Component {
     this.context.onSetTitle(title);
     //this.context.onPageNotFound();
     return (
-      <div>
+      <div className="">
         <h1>{title}</h1>
         <p>Sorry, but the page you were trying to view does not exist.</p>
       </div>

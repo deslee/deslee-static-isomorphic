@@ -14,7 +14,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 import globals from '../src/globals'
 
-const DEBUG = !process.argv.includes('release');
+const DEBUG = !process.argv.includes('release') && !global.deploy;
 const VERBOSE = process.argv.includes('verbose');
 const WATCH = global.WATCH === undefined ? false : global.WATCH;
 const AUTOPREFIXER_BROWSERS = [
@@ -134,7 +134,7 @@ const appConfig = merge({}, config, {
   output: {
     path: path.join(__dirname, '../build/public'),
     pathinfo: DEBUG,
-    filename: '[name].js',
+    filename: '[name]-[hash].js',
     publicPath: globals.publicUrl + '/'
   },
 

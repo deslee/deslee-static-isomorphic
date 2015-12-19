@@ -99,8 +99,29 @@
   height: 100%;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 
 @keyframes marquee {
   0% { left: 0; }
   100% { left: 100%; }
+}
+
+.App-transition-enter {
+  opacity: 0.01;
+}
+
+.App-transition-enter.App-transition-enter-active {
+  opacity: 1;
+  transition: opacity .25s ease-in;
+}
+
+
+.App-transition-leave {
+  display: none;
+}
+
+.App-transition-leave.App-transition-leave-active {
 }

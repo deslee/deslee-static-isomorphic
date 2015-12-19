@@ -1,6 +1,7 @@
 ---
 title:   About Desmond Lee
 page: true
+hideTitle: true
 ---
 
 # Hi, I'm Desmond

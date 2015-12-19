@@ -17,31 +17,38 @@ class ContentPage extends Component {
 
   static contextTypes = {
     onSetTitle: PropTypes.func.isRequired,
+    onSetMeta: PropTypes.func.isRequired,
   };
 
   render() {
+    this.context.onSetMeta('description', this.props.preview);
     this.context.onSetTitle(this.props.title);
     return (
       <div className="ContentPage">
         <div className="ContentPage-container">
           {
-            this.props.path === '/' ? null : <h1>{this.props.title}</h1>
+            // title
+            this.props.path === '/' ||  Boolean(this.props.hideTitle) ? null : <h1>{this.props.title}</h1>
           }
+
           {
+            // date
             this.props.date ? (
               <div className="inline">
-                <time dateTime={formatDate(new Date(this.props.date))}>{formatDate(new Date(this.props.date))}</time>
+                <time dateTime={formatDate(this.props.date)}>{formatDate(this.props.date)}</time>
                 &nbsp;
               </div>
             ) : null
           }
 
-          {this.props.tags ? (
+          {
+            // tags
+            this.props.tags ? (
             <ul className="p0 inline">
               {this.props.tags.map(
                 tag =>
                   <li className="inline" key={tag}>
-                    <a href={'tag/'+tag} className="silver navy bg-darken-1 px1 mr1 rounded"
+                    <a href={'tag/'+tag} className="black bg-darken-1 px1 mr1 rounded"
                        onClick={Link.handleClick}>{tag}</a>
                   </li>
               )}

@@ -26,7 +26,10 @@ const router = new Router(on => {
       var fitvids = require('fitvids');
       setTimeout(() => fitvids(), 1);
     }
-    return component && <App context={state.context} error={state.error}>{component}</App>;
+    /*setLoading(true);
+    await fakeWait();
+    setLoading(false);*/
+    return component && <App context={state.context} error={state.error} path={state.path}>{component}</App>;
   });
 
   on(globals.publicUrl+'/', async (state) => <BlogIndex title="Desmond Lee" meta={blogMeta} />);
@@ -51,7 +54,6 @@ const router = new Router(on => {
     if (handler) {
       setLoading(true);
       var result = await handler();
-      //await fakeWait();
       setLoading(false);
       result.path = reqPath;
       return result && <ContentPage {...result} />;

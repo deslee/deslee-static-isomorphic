@@ -5,6 +5,7 @@ import styles from './Footer.css';
 import withViewport from '../../decorators/withViewport';
 import withStyles from '../../decorators/withStyles';
 import Link from '../Link';
+import moment from 'moment'
 
 //@withViewport
 //@withStyles()
@@ -24,8 +25,8 @@ class Footer extends Component {
 
     return (
       <div className="Footer">
-        <div className="left">Desmond Lee © 2015</div>
-        <div className="right"><a href="https://github.com/deslee/deslee-static" style={{color:'inherit'}}>Source</a></div>
+        <div className="left">Desmond Lee © {moment().format("YYYY")}</div>
+        <div className="right"><a href="https://github.com/deslee/deslee-static-isomorphic" style={{color:'inherit'}}>Source</a></div>
       </div>
     );
   }

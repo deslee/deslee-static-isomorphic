@@ -10,6 +10,11 @@ import Router, {routes, blogMeta} from './routes';
 import Html from './components/Html';
 import globals from './globals'
 
+var hash;
+(async() => {
+  hash = await getHash();
+})();
+
 var customRoutes = Router.routes.map(route => {
   return route.path; //route.path.slice(globals.publicUrl.length);
 }).filter(path => path.length && path.indexOf('*') == -1 && path.indexOf(':') == -1);
@@ -78,5 +83,25 @@ async function processRoute(route) {
   console.log("writing to", filePath);
   mkdirp.sync(path.dirname(filePath));
   var html = await dispatch(route);
+  html = replaceAll(html, '&lt;?= hash ?&gt;', hash)
   fs.writeFile(filePath, html);
+}
+
+async function getHash() {
+  return new Promise((resolve, reject) => {
+    var publicPath = path.join(__dirname, 'public');
+    var dir = fs.readdirSync(publicPath);
+    var filterResult = dir.filter(name => name.indexOf('main-') == 0);
+    var fileName = filterResult.length ? filterResult[0] : null;
+    if (fileName) {
+      var hash = fileName.substring('main-'.length, fileName.indexOf('.js'));
+      resolve(hash);
+    } else {
+      reject();
+    }
+  })
+}
+
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
 }
