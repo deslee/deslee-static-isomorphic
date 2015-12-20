@@ -62,7 +62,6 @@ const router = new Router(on => {
     if (handler) {
       setLoading(true);
       var result = await handler();
-      console.log("GOT RESULT", result);
       setLoading(false);
       result.path = reqPath;
       return result && <ContentPage {...result} />;
