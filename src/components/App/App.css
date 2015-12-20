@@ -125,3 +125,6 @@ html {
 
 .App-transition-leave.App-transition-leave-active {
 }
+
+@import './fonts.css';
+@import './fa.css';

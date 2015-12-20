@@ -8,6 +8,8 @@ import ReactDOM from 'react-dom/server';
 import Router from './routes';
 import Html from './components/Html';
 import fs from 'fs';
+import {getHash} from './utils/CacheUtils';
+import {replaceAll} from './utils/StringUtils'
 
 const server = global.server = express();
 
@@ -37,32 +39,13 @@ server.get('*', async (req, res, next) => {
     var hash = await getHash();
 
     var html = ReactDOM.renderToStaticMarkup(<Html base="/" {...data} />);
-    html = replaceAll(html, '&lt;?= hash ?&gt;', hash);
+    html = replaceAll(html, '&lt;?= scripthash ?&gt;', hash.scriptHash);
+    html = replaceAll(html, '&lt;?= stylehash ?&gt;', hash.styleHash);
     res.status(statusCode).send('<!doctype html>\n' + html);
   } catch (err) {
     next(err);
   }
 });
-
-async function getHash() {
-  return new Promise((resolve, reject) => {
-    var publicPath = path.join(__dirname, 'public');
-    var dir = fs.readdirSync(publicPath);
-    var filterResult = dir.filter(name => name.indexOf('main-') == 0);
-    var fileName = filterResult.length ? filterResult[0] : null;
-    if (fileName) {
-      var hash = fileName.substring('main-'.length, fileName.indexOf('.js'));
-      resolve(hash);
-    } else {
-      reject();
-    }
-  })
-}
-
-function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
-}
-
 
 //
 // Launch the server

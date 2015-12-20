@@ -1,4 +1,17 @@
 /* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
+@import 'basscss-defaults';
 @import '../variables.css';
 
+.Sidebar ul li a  {
+  padding: 1em 0;
+  display: block;
+}
+
+
+@media (--breakpoint-md) {
+  .Sidebar ul li a  {
+    padding: inherit;
+    display: inherit;
+  }
+}

@@ -9,6 +9,8 @@ import ReactDOM from 'react-dom/server';
 import Router, {routes, blogMeta} from './routes';
 import Html from './components/Html';
 import globals from './globals'
+import {getHash} from './utils/CacheUtils';
+import {replaceAll} from './utils/StringUtils'
 
 var hash;
 (async() => {
@@ -83,32 +85,7 @@ async function processRoute(route) {
   console.log("writing to", filePath);
   mkdirp.sync(path.dirname(filePath));
   var html = await dispatch(route);
-  html = replaceAll(html, '&lt;?= hash ?&gt;', hash.scriptHash)
+  html = replaceAll(html, '&lt;?= scripthash ?&gt;', hash.scriptHash);
+  html = replaceAll(html, '&lt;?= stylehash ?&gt;', hash.styleHash);
   fs.writeFile(filePath, html);
-}
-
-async function getHash() {
-  return new Promise((resolve, reject) => {
-    var publicPath = path.join(__dirname, 'public');
-    var dir = fs.readdirSync(publicPath);
-    var mainScriptFilter = dir.filter(name => name.indexOf('main-') == 0);
-    var scriptFile = mainScriptFilter.length ? mainScriptFilter[0] : null;
-
-    var styleFilter = dir.filter(name => name.indexOf('style-') == 0);
-    var styleFile = mainScriptFilter.length ? mainScriptFilter[0] : null;
-    var result = {}
-    if (scriptFile) {
-      var scriptHash = scriptFile.substring('main-'.length, scriptFile.indexOf('.cached.js'));
-      result.scriptHash = scriptHash;
-    }
-    if (styleFile) {
-      var styleHash = styleFile.substring('style-'.length, styleFile.indexOf('.cached.css'))
-      result.styleHash = styleHash;
-    }
-    resolve(result);
-  })
-}
-
-function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
 }

@@ -2,14 +2,14 @@
 
 import React, { Component } from 'react';
 import styles from './Sidebar.css';
-import withStyles from '../../decorators/withStyles';
+//import withStyles from '../../decorators/withStyles';
 
 //@withStyles(styles)
 class Sidebar extends Component {
 
   render() {
     return (
-      <div className="Feedback">
+      <div className="Sidebar">
         <hr className="lg-hide" />
         <div className="px2 col col-12 md-col-4 lg-col-12"><h3>Friends</h3>
           <ul className="p0 list-reset">

@@ -68,7 +68,7 @@ const config = {
 
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new ExtractTextPlugin("style.[contenthash].cached.css", {
+    new ExtractTextPlugin("style-[contenthash].cached.css", {
       allChunks: true
     })
   ],

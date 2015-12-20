@@ -85,11 +85,15 @@ function uploadFile(file) {
 
 
     if (mimeType.indexOf('text/') == 0 || mimeType.indexOf('/javascript') !== -1) {
-      params.ContentEncoding = 'gzip'
+      params.ContentEncoding = 'gzip';
       stream = stream.pipe(zlib.createGzip());
     }
 
-    console.log(`Uploading ${file} of type ${mimeType} ${params.ContentEncoding == 'gzip' ? 'gzipped' : ''}`)
+    if (file.indexOf('.cached.') !== -1) {
+      params.CacheControl = "max-age=31536000"
+    }
+
+    console.log(`Uploading ${file} of type ${mimeType} ${params.ContentEncoding == 'gzip' ? 'gzipped' : ''} ${params.CacheControl ? 'with cache-control' : ''}`)
 
     params.Body = stream;
 
