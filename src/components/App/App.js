@@ -34,7 +34,7 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{'background': '#ddd'}}>
+      <div className="App-Frame">
         <div className={classNames({'loadingBar': true, 'showing': this.state.isLoading})}>
           <div className="bg-blue"></div>
         </div>

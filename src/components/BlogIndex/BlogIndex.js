@@ -22,7 +22,6 @@ class BlogIndex extends Component {
     this.context.onSetTitle(this.props.title);
     return (
       <section className="BlogIndex">
-
         {Object.keys(this.props.meta)
           .sort((k1, k2) => new Date(this.props.meta[k1].date) - new Date(this.props.meta[k2].date))
           .reverse()

@@ -16,9 +16,10 @@ import glob from 'glob';
 import mime from 'mime';
 import path from 'path';
 import zlib from 'zlib';
+import {stageBucket, prodBucket} from '../src/config'
 var s3 = new AWS.S3();
 
-var bucketName = !process.argv.includes('prod') ? 'deslee-stage' : 'deslee'
+var bucketName = !process.argv.includes('prod') ? stageBucket : prodBucket
 
 export default task('deploy', async () => {
   global.deploy = true;

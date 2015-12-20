@@ -68,7 +68,7 @@ const config = {
 
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new ExtractTextPlugin("style-[contenthash].cached.css", {
+    new ExtractTextPlugin("style-[hash].cached.css", {
       allChunks: true
     })
   ],
@@ -157,6 +157,13 @@ const appConfig = merge({}, config, {
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin(),
     ] : []),
+    function () {
+      this.plugin("done", function (stats) {
+        require("fs").writeFileSync(
+          path.join(__dirname, "../build/stats.json"),
+          JSON.stringify(stats.toJson()));
+      });
+    }
   ],
   module: {
     loaders: [

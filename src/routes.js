@@ -17,7 +17,10 @@ import setLoading from './actions/setLoading'
 export const routes = {}; // Auto-generated via webpack loader. See tools/lib/routes-loader.js
 export const blogMeta = {};
 
-console.log('available dynamic routes', Object.keys(routes))
+if (canUseDOM) {
+  window.dynamicRoutes = Object.keys(routes);
+}
+var lastView;
 
 const router = new Router(on => {
   on('*', async (state, next) => {
@@ -25,6 +28,12 @@ const router = new Router(on => {
     if (canUseDOM) {
       var fitvids = require('fitvids');
       setTimeout(() => fitvids(), 1);
+      var view = state.path + location.search;
+      if (view != lastView) {
+        lastView = view;
+        console.log("pv", view);
+        ga('send', 'pageview', view);
+      }
     }
     /*setLoading(true);
     await fakeWait();
@@ -49,11 +58,11 @@ const router = new Router(on => {
     if (reqPath.length > globals.publicUrl.length+1 && reqPath.charAt(reqPath.length-1) === '/') {
       reqPath = reqPath.slice(0, reqPath.length-1);
     }
-    console.log('route path', reqPath);
     var handler = routes[reqPath];
     if (handler) {
       setLoading(true);
       var result = await handler();
+      console.log("GOT RESULT", result);
       setLoading(false);
       result.path = reqPath;
       return result && <ContentPage {...result} />;

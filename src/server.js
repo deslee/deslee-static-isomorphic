@@ -8,8 +8,7 @@ import ReactDOM from 'react-dom/server';
 import Router from './routes';
 import Html from './components/Html';
 import fs from 'fs';
-import {getHash} from './utils/CacheUtils';
-import {replaceAll} from './utils/StringUtils'
+import {replaceHtml} from './buildStatsMetadata'
 
 const server = global.server = express();
 
@@ -36,11 +35,8 @@ server.get('*', async (req, res, next) => {
       data.css = css.join('');
     });
 
-    var hash = await getHash();
-
     var html = ReactDOM.renderToStaticMarkup(<Html base="/" {...data} />);
-    html = replaceAll(html, '&lt;?= scripthash ?&gt;', hash.scriptHash);
-    html = replaceAll(html, '&lt;?= stylehash ?&gt;', hash.styleHash);
+    html = replaceHtml(html)
     res.status(statusCode).send('<!doctype html>\n' + html);
   } catch (err) {
     next(err);

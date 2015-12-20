@@ -5,6 +5,7 @@ import styles from './ContentPage.css';
 import withStyles from '../../decorators/withStyles';
 import Link from '../Link';
 import {format as formatDate} from '../../utils/DateUtils'
+import DisqusThread from '../DisqusThread'
 
 //@withStyles(styles)
 class ContentPage extends Component {
@@ -56,6 +57,8 @@ class ContentPage extends Component {
           }
 
           <div className="mt1" dangerouslySetInnerHTML={{__html: this.props.content || ''}}/>
+
+          {this.props.blog ? <DisqusThread path={this.props.path} /> : null}
         </div>
       </div>
     );

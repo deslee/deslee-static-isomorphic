@@ -1,3 +1,3 @@
-import 'babel-core/polyfill';
-
-(async () => new Promise(resolve => require(['./app'], resolve)))();
+require.ensure(['./app'], function(require) {
+  require('./app');
+})

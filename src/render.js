@@ -9,13 +9,7 @@ import ReactDOM from 'react-dom/server';
 import Router, {routes, blogMeta} from './routes';
 import Html from './components/Html';
 import globals from './globals'
-import {getHash} from './utils/CacheUtils';
-import {replaceAll} from './utils/StringUtils'
-
-var hash;
-(async() => {
-  hash = await getHash();
-})();
+import {replaceHtml} from './buildStatsMetadata'
 
 var customRoutes = Router.routes.map(route => {
   return route.path; //route.path.slice(globals.publicUrl.length);
@@ -85,7 +79,6 @@ async function processRoute(route) {
   console.log("writing to", filePath);
   mkdirp.sync(path.dirname(filePath));
   var html = await dispatch(route);
-  html = replaceAll(html, '&lt;?= scripthash ?&gt;', hash.scriptHash);
-  html = replaceAll(html, '&lt;?= stylehash ?&gt;', hash.styleHash);
+  html = replaceHtml(html)
   fs.writeFile(filePath, html);
 }

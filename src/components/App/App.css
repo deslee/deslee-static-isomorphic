@@ -58,6 +58,10 @@
 @import 'basscss-defaults';
 @import '../variables.css';
 
+.App-Frame {
+  background: #ddd;
+}
+
 .App-container {
   min-height: 100vh;
 }
