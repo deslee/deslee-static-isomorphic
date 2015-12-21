@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import styles from './Sidebar.css';
 //import withStyles from '../../decorators/withStyles';
 
+
 //@withStyles(styles)
 class Sidebar extends Component {
-
   render() {
     return (
       <div className="Sidebar">
@@ -18,12 +18,13 @@ class Sidebar extends Component {
           </ul>
         </div>
         <div className="px2 col col-12 md-col-4 lg-col-12"><h3>Contact me</h3>
-          <ul>
+          <ul className="list-reset">
             <li><a href="https://plus.google.com/+DesmondLeeC/">Google+ <i className="fa fa-google-plus-square red"></i></a>
             </li>
             <li><a href="https://twitter.com/desmond_c_lee">Twitter <i className="fa fa-twitter blue"></i></a></li>
           </ul>
         </div>
+
 
       </div>
     );

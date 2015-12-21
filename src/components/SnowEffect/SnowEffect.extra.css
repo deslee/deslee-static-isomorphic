@@ -1,11 +1,15 @@
-/* React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
+@import 'basscss-defaults';
+@import '../App/App.css';
 
-
+* {
+  transition: background-color 0.3s;
+}
 
 :root {
-  --body-color: #444;
-  --body-background-color: #fff;
-  --frame-color: #ddd;
+  --body-background-color: #333;
+  --link-color: #ccc;
+  --frame-color: #555;
+  --body-color: #eee;
   --field-error-color: var(--border-color);
   --heading-font-family: 'Roboto Slab', serif;
   --heading-font-weight: 300;

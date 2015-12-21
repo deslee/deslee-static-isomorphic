@@ -14,7 +14,7 @@ class Navigation extends Component {
   };
 
   render() {
-    var navItem = 'py1 pl0 pr0 md-no-hover-box-shadow md-no-active-box-shadow block col-12 btn btn-outline not-rounded y-group-item regular white main-nav-item'
+    var navItem = 'border-none py1 pl0 pr0 md-no-hover-box-shadow md-no-active-box-shadow block col-12 btn btn-outline not-rounded y-group-item regular white main-nav-item'
     return (
       <nav className={classNames(this.props.className, 'Navigation')} role="navigation">
         <ul className="col-12 p0 list-reset inline-block clearfix blue">

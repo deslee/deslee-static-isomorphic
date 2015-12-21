@@ -43,7 +43,7 @@ class BlogIndex extends Component {
               {post.tags.map(
                 tag =>
                   <li className="inline" key={tag}>
-                    <a href={'tag/'+tag} className="black bg-darken-1 px1 mr1 rounded" onClick={Link.handleClick}>{tag}</a>
+                    <a href={'tag/'+tag} className="body-color bg-darken-1 px1 mr1 rounded" onClick={Link.handleClick}>{tag}</a>
                   </li>
               )}
             </ul>

@@ -1,0 +1,6 @@
+{
+  "name": "SnowEffect",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./SnowEffect.js"
+}

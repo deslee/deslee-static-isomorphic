@@ -59,7 +59,15 @@
 @import '../variables.css';
 
 .App-Frame {
-  background: #ddd;
+  background: var(--frame-color);
+}
+
+.bg-app {
+  background: var(--body-background-color);
+}
+
+.body-color {
+  color: var(--body-color);
 }
 
 .App-container {
@@ -128,6 +136,28 @@ html {
 }
 
 .App-transition-leave.App-transition-leave-active {
+}
+
+.ExtraMenu-transition-enter {
+  transform: translateY(-100%);
+  transition: transform .3s;
+}
+
+.ExtraMenu-transition-enter.ExtraMenu-transition-enter-active {
+  transform: translateY(0%);
+}
+
+.ExtraMenu-transition-leave {
+  transform: translateY(0%);
+  transition: transform .3s;
+}
+
+.ExtraMenu-transition-leave.ExtraMenu-transition-leave-active {
+  transform: translateY(-100%);
+}
+
+.hover-cursor:hover {
+  cursor: pointer;
 }
 
 @import './fonts.css';

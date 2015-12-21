@@ -10,6 +10,12 @@ import Footer from '../Footer';
 import classNames from 'classnames'
 import AppStore from '../../stores/AppStore'
 import CSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
+import Effects from '../Effects'
+
+
+var components = {
+  'handler_extraMenu': () => new Promise(resolve => require(['../ExtraMenu'], resolve))
+};
 
 @withContext
 class App extends Component {
@@ -21,11 +27,25 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    AppStore.subscribe(() => {
+    this.unsubscribe = AppStore.subscribe(() => {
       this.setState({
         isLoading: AppStore.getState().pageLoading
       })
     })
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
+
+  extraMenu(show, e) {
+    (async () => {
+        components.ExtraMenu = await components['handler_extraMenu']();
+        this.setState({showExtraMenu: show});
+      })();
+    e.preventDefault();
   }
 
   state = {
@@ -35,20 +55,30 @@ class App extends Component {
   render() {
     return (
       <div className="App-Frame">
+
         <div className={classNames({'loadingBar': true, 'showing': this.state.isLoading})}>
           <div className="bg-blue"></div>
         </div>
 
+
+        <CSSTransitionGroup transitionName="ExtraMenu-transition" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+          {this.state.showExtraMenu ? <components.ExtraMenu></components.ExtraMenu> : null}
+        </CSSTransitionGroup>
+        <Effects />
+
         <div className="App-container container flex flex-column">
 
           <div className="cont-mt1 animate-margin-top"></div>
-          <div className="clearfix flex-grow sym-shadow bg-white">
+          <div className="clearfix flex-grow sym-shadow bg-app">
+            <i className="fa fa-bars absolute p2 h1 hover-cursor"
+               onClick={this.extraMenu.bind(this, !Boolean(this.state.showExtraMenu))}></i>
             <header className="px2 col col-12 md-col-3 center md-left">
               <Header />
             </header>
 
             <main className="px2 col col-12 md-col-9 lg-col-6">
-              <CSSTransitionGroup transitionName="App-transition" transitionEnterTimeout={250} transitionLeaveTimeout={1} >
+              <CSSTransitionGroup transitionName="App-transition" transitionEnterTimeout={250}
+                                  transitionLeaveTimeout={1}>
                 <div key={this.props.path}>{this.props.children}</div>
               </CSSTransitionGroup>
             </main>
@@ -58,7 +88,7 @@ class App extends Component {
             </div>
           </div>
 
-          <footer className="gray left-align p2 sym-shadow bg-white">
+          <footer className="gray left-align p2 sym-shadow bg-app">
             <Footer />
           </footer>
         </div>

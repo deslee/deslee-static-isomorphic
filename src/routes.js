@@ -12,7 +12,7 @@ import globals from './globals'
 import Location from './core/Location';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
-import setLoading from './actions/setLoading'
+import {setLoading} from './actions'
 
 export const routes = {}; // Auto-generated via webpack loader. See tools/lib/routes-loader.js
 export const blogMeta = {};

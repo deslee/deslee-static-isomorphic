@@ -49,7 +49,7 @@ class ContentPage extends Component {
               {this.props.tags.map(
                 tag =>
                   <li className="inline" key={tag}>
-                    <a href={'tag/'+tag} className="black bg-darken-1 px1 mr1 rounded"
+                    <a href={'tag/'+tag} className="body-color bg-darken-1 px1 mr1 rounded"
                        onClick={Link.handleClick}>{tag}</a>
                   </li>
               )}
