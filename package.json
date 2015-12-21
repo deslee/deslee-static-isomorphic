@@ -49,6 +49,7 @@
     "fitvids": "^1.0.2",
     "flex-object": "latest",
     "flux": "2.1.1",
+    "gyronorm": "^2.0.4",
     "history": "1.11.1",
     "moment": "^2.10.6",
     "normalize.css": "3.0.3",

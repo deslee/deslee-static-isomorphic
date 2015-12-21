@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styles from './TiltEffect.extra.css';
 import withStyles from '../../decorators/withStyles';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
-
-
+import fulltilt from './fulltilt'
+import GyroNorm from 'gyronorm';
 
 function mouseMove(e) {
   var containers = document.getElementsByClassName('App-container');
@@ -26,6 +26,11 @@ function mouseMove(e) {
   }
 }
 
+
+function logger(data) {
+  console.log(data);
+}
+
 @withStyles(styles)
 class TiltEffect extends Component {
 
@@ -43,6 +48,29 @@ class TiltEffect extends Component {
 
     this.listener = mouseMove.bind(this);
 
+    if (canUseDOM) {
+      console.log("loading fulltilt")
+      fulltilt(window);
+      console.log("loading gyronorm")
+      var gn = this.gn = new GyroNorm();
+      console.log('initializing');
+      gn.init({
+        logger: logger
+      }).then(() => {
+        console.log("initialized");
+        var smoothing = 6;
+        gn.start(data => {
+          if (data.do.gamma != 0 && data.do.beta != 0) {
+            this.setState({
+              'do': data.do,
+              xDeg: -data.do.gamma / smoothing,
+              yDeg: data.do.beta / smoothing
+            });
+          }
+        })
+      });
+    }
+
     if (containers.length >= 1) {
       var container = containers[0];
       container.addEventListener('mousemove', this.listener);
@@ -51,6 +79,10 @@ class TiltEffect extends Component {
 
   componentWillUnmount() {
     var containers = document.getElementsByClassName('App-container');
+
+    if (this.gn) {
+      this.gn.end();
+    }
 
     if (containers.length >= 1 && this.listener) {
       var container = containers[0];
