@@ -5,6 +5,7 @@
     "npm": ">=3.1 <4"
   },
   "dependencies": {
+    "aws-sdk": "^2.2.35",
     "babel-core": "5.8.25",
     "basscss": "latest",
     "basscss-align": "latest",
@@ -46,6 +47,7 @@
     "express": "4.13.3",
     "fastclick": "1.0.6",
     "fbjs": "0.3.1",
+    "filedrop": "^2.0.0",
     "fitvids": "^1.0.2",
     "flex-object": "latest",
     "flux": "2.1.1",

@@ -66,6 +66,10 @@ const config = {
     cachedAssets: VERBOSE,
   },
 
+  node: {
+    fs: "empty"
+  },
+
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new ExtractTextPlugin("style-[hash].cached.css", {

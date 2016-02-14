@@ -12,10 +12,15 @@ import globals from './globals'
 import Location from './core/Location';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
+
+import StupidTweetySubmissionMaker from './pages/StupidTweetySubmissionMaker'
+
 import {setLoading} from './actions'
 
 export const routes = {}; // Auto-generated via webpack loader. See tools/lib/routes-loader.js
 export const blogMeta = {};
+
+StupidTweetySubmissionMaker.initializeMeta(blogMeta);
 
 if (canUseDOM) {
   window.dynamicRoutes = Object.keys(routes);
@@ -42,6 +47,7 @@ const router = new Router(on => {
   });
 
   on(globals.publicUrl+'/', async (state) => <BlogIndex title="Desmond Lee" meta={blogMeta} />);
+  on(globals.publicUrl+'/stupid-tweety-submission-maker', async (state) => <StupidTweetySubmissionMaker />);
   on(globals.publicUrl+'/archive', async (state) => <BlogIndex title="Desmond Lee" meta={blogMeta} archive="true" />);
   on(globals.publicUrl+'/tag/:tag', async (state) => <BlogIndex title="Desmond Lee" meta={blogMeta} tag={state.params.tag} />);
 
