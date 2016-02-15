@@ -1,15 +1,18 @@
-
 import "filedrop";
 import "aws-sdk/dist/aws-sdk";
+
+var content = require("./StupidTweetySubmissionMaker.md");
 
 const AWS = window.AWS;
 
 var fakeInput = document.createElement('input');
 fakeInput.type = 'file';
 
-export default function(dropid, canvasId, tweetyId, statusUpdate) {
+export default function(dropid, canvasId, tweetyId, statusUpdate, onContent) {
   AWS.config.region = 'us-east-1';
   AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: "us-east-1:d15dccd8-d8ce-4898-bef3-e3139112b7af"});
+
+	onContent(content);
 
   var s3 = new AWS.S3();
   var lambda = new AWS.Lambda();
@@ -104,11 +107,11 @@ export default function(dropid, canvasId, tweetyId, statusUpdate) {
     }
     ctx.drawImage(img, 0,0, dw, dh);
 
-    uploadFaces();
     statusUpdate("Image drawn");
+    uploadFaces();
   }
 
-  var zone = new FileDrop(dropid);
+  var zone = new FileDrop(dropid, {dragOverClass: "draggingOver"});
   zone.event('send', function(files) {
     statusUpdate("Loading image");
     if (files.length <= 0) {

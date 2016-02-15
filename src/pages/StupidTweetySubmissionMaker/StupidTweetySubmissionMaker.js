@@ -11,19 +11,21 @@ var dependencyLoader = () => new Promise(resolve => require(['./StupidTweetySubm
 var deps;
 
 var postProps = {
-  title: "Stupid Tweety Submission Maker",
-  slug: "stupid-tweety-submission-maker",
+  title: "AWS Cloud Facial Recognition",
+  slug: "aws-cloud-facial-recognition",
   date: "2016-02-14",
-  preview: "I made a tweety thing",
+  preview: "I wrote a web application that detects faces in a picture and draws over the region.",
   tags: ["dev", "aws"]
 };
 
+withStyles(styles)
 class StupidTweetySubmissionMaker extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loaded: false,
-      status: "Waiting for Picture"
+      status: "Waiting for Picture",
+			content: ""
     };
     console.log(this.state.loaded, "const")
   }
@@ -33,8 +35,15 @@ class StupidTweetySubmissionMaker extends Component {
     this.setState({
       loaded: true
     });
-    deps("StupidTweetySubmissionMaker-DropHere", "StupidTweetySubmissionMaker-Canvas", "StupidTweetySubmissionMaker-Tweety", this.statusUpdate.bind(this))
+    deps("StupidTweetySubmissionMaker-DropHere", "StupidTweetySubmissionMaker-Canvas", "StupidTweetySubmissionMaker-Tweety", this.statusUpdate.bind(this), this.onContent.bind(this))
   }
+
+	onContent(data) {
+		var content = data.content;
+		this.setState({
+			content: content
+		});
+	}
 
   statusUpdate(status) {
     this.setState({
@@ -53,7 +62,7 @@ class StupidTweetySubmissionMaker extends Component {
       console.log("loadingggg")
       return (
         <ContentHeader {...postProps}>
-          loadin
+          Loading
         </ContentHeader>
       )
     }
@@ -64,7 +73,10 @@ class StupidTweetySubmissionMaker extends Component {
       <ContentHeader {...postProps}>
         <div className="mt1">
 
-          <p>{this.state.status}</p>
+        	<div className="mt1" dangerouslySetInnerHTML={{__html: this.state.content || ''}}/>
+
+					<p>Status: <code>{this.state.status}</code></p>
+          
 
           <div className="clearfix">
             <button className="btn col-12 p2 bg-yellow black" id="StupidTweetySubmissionMaker-DropHere">
